@@ -24,8 +24,6 @@ const App: FC = () => {
 
 			SetWidth(width)
 			SetHeight(height)
-
-			console.log(width, height)
 		})
 
 		resizeObserver.observe(modal)
