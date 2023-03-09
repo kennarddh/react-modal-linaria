@@ -1,14 +1,21 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 
+import { useDrag, useDrop, XYCoord } from 'react-dnd'
+import { getEmptyImage } from 'react-dnd-html5-backend'
+
 import ReactPortal from 'Components/ReactPortal/ReactPortal'
 
-import { Modal } from './AppStyles'
+import { Modal, Container } from './AppStyles'
+import { MergeRef } from 'Utils/MergeRef'
 
 const App: FC = () => {
 	const [Width, SetWidth] = useState<number>(500)
 	const [Height, SetHeight] = useState<number>(300)
+	const [Top, SetTop] = useState<number>(0)
+	const [Left, SetLeft] = useState<number>(0)
 
 	const ModalRef = useRef<HTMLDivElement>(null)
+	const PrevDeltaRef = useRef<XYCoord | null>(null)
 
 	const OnResize = useCallback((event: UIEvent) => {
 		console.log(event.detail)
@@ -33,15 +40,56 @@ const App: FC = () => {
 		}
 	}, [OnResize])
 
+	const [, drop] = useDrop(
+		() => ({
+			accept: 'Modal',
+			hover(_, monitor) {
+				const delta = monitor.getDifferenceFromInitialOffset()
+				console.log({ delta })
+
+				const deltaX = delta?.x ?? 0
+				const deltaY = delta?.y ?? 0
+
+				const prevDeltaX = PrevDeltaRef.current?.x ?? 0
+				const prevDeltaY = PrevDeltaRef.current?.y ?? 0
+
+				SetTop(prev => prev + deltaY - prevDeltaY)
+				SetLeft(prev => prev + deltaX - prevDeltaX)
+
+				PrevDeltaRef.current = { x: deltaX, y: deltaY }
+			},
+			drop() {
+				PrevDeltaRef.current = { x: 0, y: 0 }
+			},
+		}),
+		[]
+	)
+
+	const [, drag, dragPreview] = useDrag(
+		() => ({
+			type: 'Modal',
+		}),
+		[]
+	)
+
+	useEffect(() => {
+		dragPreview(getEmptyImage(), { captureDraggingState: true })
+	}, [dragPreview])
+
 	return (
-		<div>
-			<ReactPortal wrapperId='modal'>
+		<ReactPortal wrapperId='modals'>
+			<Container ref={drop}>
 				<Modal
-					ref={ModalRef}
-					style={{ width: Width, height: Height }}
+					ref={MergeRef(ModalRef, drag)}
+					style={{
+						width: Width,
+						height: Height,
+						top: Top,
+						left: Left,
+					}}
 				></Modal>
-			</ReactPortal>
-		</div>
+			</Container>
+		</ReactPortal>
 	)
 }
 
