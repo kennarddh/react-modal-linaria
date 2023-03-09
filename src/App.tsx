@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import { useDrag, useDrop, XYCoord } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
@@ -6,6 +6,8 @@ import { getEmptyImage } from 'react-dnd-html5-backend'
 import ReactPortal from 'Components/ReactPortal/ReactPortal'
 
 import { Modal, Container, ModalHeader, ModalBody } from './AppStyles'
+import Clamp from 'Utils/Clamp'
+import useRefCallback from 'Hooks/useRefCallback'
 
 const App: FC = () => {
 	const [Width, SetWidth] = useState<number>(500)
@@ -13,14 +15,9 @@ const App: FC = () => {
 	const [Top, SetTop] = useState<number>(0)
 	const [Left, SetLeft] = useState<number>(0)
 
-	const ModalRef = useRef<HTMLDivElement>(null)
 	const PrevDeltaRef = useRef<XYCoord | null>(null)
 
-	const OnResize = useCallback((event: UIEvent) => {
-		console.log(event.detail)
-	}, [])
-
-	useEffect(() => {
+	const ModalRef = useRefCallback<HTMLDivElement | null>(null, () => {
 		if (!ModalRef.current) return
 
 		const modal = ModalRef.current
@@ -28,8 +25,13 @@ const App: FC = () => {
 		const resizeObserver = new ResizeObserver(entries => {
 			const { width, height } = entries[0].contentRect
 
-			SetWidth(width)
-			SetHeight(height)
+			if (width !== 0) {
+				SetWidth(width)
+			}
+
+			if (height !== 0) {
+				SetHeight(height)
+			}
 		})
 
 		resizeObserver.observe(modal)
@@ -37,7 +39,7 @@ const App: FC = () => {
 		return () => {
 			resizeObserver.unobserve(modal)
 		}
-	}, [OnResize])
+	})
 
 	const [, drop] = useDrop(
 		() => ({

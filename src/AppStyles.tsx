@@ -12,6 +12,9 @@ export const Modal = styled.div`
 
 	position: absolute;
 
+	min-width: 200px;
+	min-height: 50px;
+
 	&::-webkit-resizer {
 		border-right: 2px solid #000;
 		border-bottom: 2px solid #000;
