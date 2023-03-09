@@ -5,8 +5,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend'
 
 import ReactPortal from 'Components/ReactPortal/ReactPortal'
 
-import { Modal, Container } from './AppStyles'
-import { MergeRef } from 'Utils/MergeRef'
+import { Modal, Container, ModalHeader, ModalBody } from './AppStyles'
 
 const App: FC = () => {
 	const [Width, SetWidth] = useState<number>(500)
@@ -45,7 +44,6 @@ const App: FC = () => {
 			accept: 'Modal',
 			hover(_, monitor) {
 				const delta = monitor.getDifferenceFromInitialOffset()
-				console.log({ delta })
 
 				const deltaX = delta?.x ?? 0
 				const deltaY = delta?.y ?? 0
@@ -80,14 +78,17 @@ const App: FC = () => {
 		<ReactPortal wrapperId='modals'>
 			<Container ref={drop}>
 				<Modal
-					ref={MergeRef(ModalRef, drag)}
+					ref={ModalRef}
 					style={{
 						width: Width,
 						height: Height,
 						top: Top,
 						left: Left,
 					}}
-				></Modal>
+				>
+					<ModalHeader ref={drag}></ModalHeader>
+					<ModalBody></ModalBody>
+				</Modal>
 			</Container>
 		</ReactPortal>
 	)

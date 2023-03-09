@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 
-export const Modal = styled.div`
-	background-color: #d8d8d8;
+export const Container = styled.div`
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+`
 
+export const Modal = styled.div`
 	overflow: auto;
 	resize: both;
 
@@ -14,8 +18,28 @@ export const Modal = styled.div`
 	}
 `
 
-export const Container = styled.div`
-	height: 100vh;
-	position: relative;
-	overflow: hidden;
+export const ModalHeader = styled.div`
+	width: 100%;
+	height: 30px;
+
+	background-color: #ececec;
+
+	display: flex;
+	justify-content: flex-end;
+`
+
+export const ModalHeaderRight = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+	width: 100px;
+`
+
+export const ModalBody = styled.div`
+	background-color: #d8d8d8;
+
+	width: 100%;
+	height: calc(100% - 30px);
 `
