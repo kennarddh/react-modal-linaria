@@ -3,11 +3,10 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { useDrag, useDrop, XYCoord } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 
+import useRefCallback from 'Hooks/useRefCallback'
 import ReactPortal from 'Components/ReactPortal/ReactPortal'
 
 import { Modal, Container, ModalHeader, ModalBody } from './AppStyles'
-import Clamp from 'Utils/Clamp'
-import useRefCallback from 'Hooks/useRefCallback'
 
 const App: FC = () => {
 	const [Width, SetWidth] = useState<number>(500)
