@@ -11,7 +11,7 @@ import { IModalStatus } from 'Contexts/Modals'
 
 import { IModalItem } from 'Types'
 
-import { Container } from './AppStyles'
+import { Container, Footer, FooterItem } from './AppStyles'
 
 const App: FC = () => {
 	const PrevDeltaRef = useRef<XYCoord | null>(null)
@@ -45,15 +45,22 @@ const App: FC = () => {
 	)
 
 	return (
-		<ReactPortal wrapperId='modals'>
-			<Container ref={drop}>
-				{Object.keys(Modals)
-					.filter(id => Modals[id].status === IModalStatus.Open)
-					.map(id => (
-						<Modal id={id} key={id} />
-					))}
-			</Container>
-		</ReactPortal>
+		<>
+			<Footer>
+				{Object.keys(Modals).map(id => (
+					<FooterItem key={id}>{Modals[id].name}</FooterItem>
+				))}
+			</Footer>
+			<ReactPortal wrapperId='modals'>
+				<Container ref={drop}>
+					{Object.keys(Modals)
+						.filter(id => Modals[id].status === IModalStatus.Open)
+						.map(id => (
+							<Modal id={id} key={id} />
+						))}
+				</Container>
+			</ReactPortal>
+		</>
 	)
 }
 
