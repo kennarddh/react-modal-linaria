@@ -1,7 +1,7 @@
 /* eslint-disable security/detect-object-injection */
 import { FC, createContext, ReactNode, useCallback, useState } from 'react'
 
-type IUpdateModal = (id: string, options: IModal) => void
+type IUpdateModal = (id: string, options: Partial<IModal>) => void
 
 interface IModalsContext {
 	UpdateModal: IUpdateModal
