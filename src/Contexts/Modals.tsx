@@ -12,7 +12,7 @@ interface IModalsContext {
 	Modals: Record<string, IModal>
 }
 
-export enum IStatus {
+export enum IModalStatus {
 	Open,
 	Closed,
 }
@@ -23,7 +23,7 @@ export interface IModal {
 	y: number
 	width: number
 	height: number
-	status: IStatus
+	status: IModalStatus
 }
 
 const ModalsContext = createContext<IModalsContext>({
@@ -37,7 +37,7 @@ export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 			name: 'First',
 			height: 200,
 			width: 200,
-			status: IStatus.Open,
+			status: IModalStatus.Open,
 			x: 100,
 			y: 100,
 		},

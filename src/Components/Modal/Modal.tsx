@@ -1,10 +1,12 @@
-import { FC, useEffect } from 'react'
+import { FC, useCallback, useEffect } from 'react'
 
 import { useDrag } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 
 import useRefCallback from 'Hooks/useRefCallback'
 import useModals from 'Hooks/useModals'
+
+import { IModalStatus } from 'Contexts/Modals'
 
 import { IModalItem } from 'Types'
 
@@ -56,6 +58,10 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 		dragPreview(getEmptyImage(), { captureDraggingState: true })
 	}, [dragPreview])
 
+	const Close = useCallback(() => {
+		UpdateModal(id, { status: IModalStatus.Closed })
+	}, [UpdateModal, id])
+
 	return (
 		<StyledModal
 			ref={ModalRef}
@@ -70,7 +76,7 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 				<ModalHeaderLeft>{Modals[id].name}</ModalHeaderLeft>
 				<ModalHeaderRight>
 					<ModalHeaderButton>-</ModalHeaderButton>
-					<ModalHeaderButton>X</ModalHeaderButton>
+					<ModalHeaderButton onClick={Close}>X</ModalHeaderButton>
 				</ModalHeaderRight>
 			</ModalHeader>
 			<ModalBody></ModalBody>
