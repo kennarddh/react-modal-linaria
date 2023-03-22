@@ -62,6 +62,12 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 		UpdateModal(id, { status: IModalStatus.Closed })
 	}, [UpdateModal, id])
 
+	const ToggleMinimized = useCallback(() => {
+		UpdateModal(id, {
+			status: IModalStatus.Minimized,
+		})
+	}, [UpdateModal, id])
+
 	return (
 		<StyledModal
 			ref={ModalRef}
@@ -75,7 +81,9 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 			<ModalHeader ref={drag}>
 				<ModalHeaderLeft>{Modals[id].name}</ModalHeaderLeft>
 				<ModalHeaderRight>
-					<ModalHeaderButton>-</ModalHeaderButton>
+					<ModalHeaderButton onClick={ToggleMinimized}>
+						-
+					</ModalHeaderButton>
 					<ModalHeaderButton onClick={Close}>X</ModalHeaderButton>
 				</ModalHeaderRight>
 			</ModalHeader>
