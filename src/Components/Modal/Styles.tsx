@@ -22,7 +22,10 @@ export const ModalHeader = styled.div`
 	background-color: #ececec;
 
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	flex-direction: row;
+
+	padding: 0 10px;
 `
 
 export const ModalHeaderRight = styled.div`
@@ -32,6 +35,25 @@ export const ModalHeaderRight = styled.div`
 
 	height: 100%;
 	width: 100px;
+`
+
+export const ModalHeaderLeft = styled.p`
+	display: flex;
+	align-items: center;
+
+	height: 100%;
+	width: calc(100% - 100px);
+
+	overflow-x: hidden;
+`
+
+export const ModalHeaderButton = styled.button`
+	height: 100%;
+	width: 50%;
+
+	border: none;
+
+	background-color: transparent;
 `
 
 export const ModalBody = styled.div`

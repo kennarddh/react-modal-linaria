@@ -8,7 +8,14 @@ import useModals from 'Hooks/useModals'
 
 import { IModalItem } from 'Types'
 
-import { StyledModal, ModalHeader, ModalBody } from './Styles'
+import {
+	StyledModal,
+	ModalHeader,
+	ModalBody,
+	ModalHeaderLeft,
+	ModalHeaderRight,
+	ModalHeaderButton,
+} from './Styles'
 
 const Modal: FC<{ id: string }> = ({ id }) => {
 	const { Modals, UpdateModal } = useModals()
@@ -59,7 +66,13 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 				left: Modals[id].x,
 			}}
 		>
-			<ModalHeader ref={drag}></ModalHeader>
+			<ModalHeader ref={drag}>
+				<ModalHeaderLeft>{Modals[id].name}</ModalHeaderLeft>
+				<ModalHeaderRight>
+					<ModalHeaderButton>-</ModalHeaderButton>
+					<ModalHeaderButton>X</ModalHeaderButton>
+				</ModalHeaderRight>
+			</ModalHeader>
 			<ModalBody></ModalBody>
 		</StyledModal>
 	)
