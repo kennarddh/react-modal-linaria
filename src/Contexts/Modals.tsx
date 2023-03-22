@@ -31,28 +31,35 @@ const ModalsContext = createContext<IModalsContext>({
 })
 
 export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
-	const [Modals, SetModals] = useState<Record<string, IModal>>({})
+	const [Modals, SetModals] = useState<Record<string, IModal>>({
+		'316ca831-aa32-441f-955e-263a19be6617': {
+			height: 200,
+			width: 200,
+			status: IStatus.Open,
+			x: 100,
+			y: 100,
+		},
+	})
 
-	const UpdateModal: IUpdateModal = useCallback(
-		(id, modal) => {
+	const UpdateModal: IUpdateModal = useCallback((id, modal) => {
+		SetModals(prev => {
 			let data: Partial<IModal>
 
 			if (typeof modal === 'function') {
-				data = modal(Modals[id])
+				data = modal(prev[id])
 			} else {
 				data = modal
 			}
 
-			SetModals(prev => ({
+			return {
 				...prev,
 				[id]: {
 					...prev[id],
 					...data,
 				},
-			}))
-		},
-		[Modals]
-	)
+			}
+		})
+	}, [])
 
 	return (
 		<ModalsContext.Provider value={{ Modals, UpdateModal }}>
