@@ -15,6 +15,7 @@ interface IModalsContext {
 export enum IModalStatus {
 	Open,
 	Closed,
+	Minimized,
 }
 
 export interface IModal {
