@@ -4,6 +4,7 @@ import { useDrop, XYCoord } from 'react-dnd'
 
 import ReactPortal from 'Components/ReactPortal/ReactPortal'
 import Modal from 'Components/Modal/Modal'
+import Footer from 'Components/Footer/Footer'
 
 import useModals from 'Hooks/useModals'
 
@@ -11,7 +12,7 @@ import { IModalStatus } from 'Contexts/Modals'
 
 import { IModalItem } from 'Types'
 
-import { Container, Footer, FooterItem } from './AppStyles'
+import { Container } from './AppStyles'
 
 const App: FC = () => {
 	const PrevDeltaRef = useRef<XYCoord | null>(null)
@@ -46,11 +47,7 @@ const App: FC = () => {
 
 	return (
 		<>
-			<Footer>
-				{Object.keys(Modals).map(id => (
-					<FooterItem key={id}>{Modals[id].name}</FooterItem>
-				))}
-			</Footer>
+			<Footer />
 			<ReactPortal wrapperId='modals'>
 				<Container ref={drop}>
 					{Object.keys(Modals)
