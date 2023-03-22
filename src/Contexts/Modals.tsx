@@ -18,6 +18,7 @@ export enum IStatus {
 }
 
 export interface IModal {
+	name: string
 	x: number
 	y: number
 	width: number
@@ -33,6 +34,7 @@ const ModalsContext = createContext<IModalsContext>({
 export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [Modals, SetModals] = useState<Record<string, IModal>>({
 		'316ca831-aa32-441f-955e-263a19be6617': {
+			name: 'First',
 			height: 200,
 			width: 200,
 			status: IStatus.Open,
