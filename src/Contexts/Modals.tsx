@@ -16,6 +16,8 @@ export enum IStatus {
 export interface IModal {
 	x: number
 	y: number
+	width: number
+	height: number
 	status: IStatus
 }
 
