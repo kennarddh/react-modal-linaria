@@ -1,6 +1,11 @@
 import { FC, createContext, ReactNode, useCallback, useState } from 'react'
 
-type IUpdateModal = (id: string, options: Partial<IModal>) => void
+import { IValueOrFactory } from 'Types'
+
+type IUpdateModal = (
+	id: string,
+	options: IValueOrFactory<Partial<IModal>, IModal>
+) => void
 
 interface IModalsContext {
 	UpdateModal: IUpdateModal
@@ -28,15 +33,26 @@ const ModalsContext = createContext<IModalsContext>({
 export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [Modals, SetModals] = useState<Record<string, IModal>>({})
 
-	const UpdateModal: IUpdateModal = useCallback((id, modal) => {
-		SetModals(prev => ({
-			...prev,
-			[id]: {
-				...prev[id],
-				...modal,
-			},
-		}))
-	}, [])
+	const UpdateModal: IUpdateModal = useCallback(
+		(id, modal) => {
+			let data: Partial<IModal>
+
+			if (typeof modal === 'function') {
+				data = modal(Modals[id])
+			} else {
+				data = modal
+			}
+
+			SetModals(prev => ({
+				...prev,
+				[id]: {
+					...prev[id],
+					...data,
+				},
+			}))
+		},
+		[Modals]
+	)
 
 	return (
 		<ModalsContext.Provider value={{ Modals, UpdateModal }}>
