@@ -2,8 +2,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
+import { ModalsProvider } from 'Contexts/Modals'
 
 import App from './App'
 
@@ -15,7 +17,9 @@ root.render(
 	<React.StrictMode>
 		<GlobalStyle />
 		<DndProvider backend={HTML5Backend}>
-			<App />
+			<ModalsProvider>
+				<App />
+			</ModalsProvider>
 		</DndProvider>
 	</React.StrictMode>
 )
