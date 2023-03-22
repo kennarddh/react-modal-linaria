@@ -1,10 +1,10 @@
 /* eslint-disable security/detect-object-injection */
 import { FC, createContext, ReactNode, useCallback, useState } from 'react'
 
-type IMoveModal = (options: { id: string; x: number; y: number }) => void
+type IUpdateModal = (id: string, options: IModal) => void
 
 interface IModalsContext {
-	MoveModal: IMoveModal
+	UpdateModal: IUpdateModal
 	Modals: Record<string, IModal>
 }
 
@@ -22,26 +22,25 @@ export interface IModal {
 }
 
 const ModalsContext = createContext<IModalsContext>({
-	MoveModal: () => undefined,
+	UpdateModal: () => undefined,
 	Modals: {},
 })
 
 export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [Modals, SetModals] = useState<Record<string, IModal>>({})
 
-	const MoveModal: IMoveModal = useCallback(({ id, x, y }) => {
+	const UpdateModal: IUpdateModal = useCallback((id, modal) => {
 		SetModals(prev => ({
 			...prev,
 			[id]: {
 				...prev[id],
-				x,
-				y,
+				...modal,
 			},
 		}))
 	}, [])
 
 	return (
-		<ModalsContext.Provider value={{ Modals, MoveModal }}>
+		<ModalsContext.Provider value={{ Modals, UpdateModal }}>
 			{children}
 		</ModalsContext.Provider>
 	)
