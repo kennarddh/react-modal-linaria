@@ -65,6 +65,11 @@ export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 			) {
 				const Component = { ...prev[id], ...data }.component
 				data.componentState = <Component />
+			} else if (
+				data.status === IModalStatus.Minimized &&
+				prev[id].status === IModalStatus.Closed
+			) {
+				throw new Error('Cannot minimize closed modal')
 			}
 
 			return {
