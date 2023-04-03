@@ -87,7 +87,7 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 					<ModalHeaderButton onClick={Close}>X</ModalHeaderButton>
 				</ModalHeaderRight>
 			</ModalHeader>
-			<ModalBody></ModalBody>
+			<ModalBody>{Modals[id].componentState}</ModalBody>
 		</StyledModal>
 	)
 }
