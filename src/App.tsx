@@ -8,6 +8,8 @@ import Footer from 'Components/Footer/Footer'
 
 import useModals from 'Hooks/useModals'
 
+import { IModalStatus } from 'Contexts/Modals'
+
 import { IModalItem } from 'Types'
 
 import { Container } from './AppStyles'
@@ -48,9 +50,11 @@ const App: FC = () => {
 			<Footer />
 			<ReactPortal wrapperId='modals'>
 				<Container ref={drop}>
-					{Object.keys(Modals).map(id => (
-						<Modal id={id} key={id} />
-					))}
+					{Object.keys(Modals)
+						.filter(id => Modals[id].status !== IModalStatus.Closed)
+						.map(id => (
+							<Modal id={id} key={id} />
+						))}
 				</Container>
 			</ReactPortal>
 		</>
