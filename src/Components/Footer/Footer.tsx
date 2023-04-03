@@ -9,11 +9,12 @@ import { StyledFooter, FooterItem } from './Styles'
 const Footer: FC = () => {
 	const { Modals, UpdateModal } = useModals()
 
-	const ToggleMinimized = useCallback(
+	const Toggle = useCallback(
 		(id: string) => {
 			UpdateModal(id, prev => ({
 				status:
-					prev.status === IModalStatus.Minimized
+					prev.status === IModalStatus.Minimized ||
+					prev.status === IModalStatus.Closed
 						? IModalStatus.Open
 						: IModalStatus.Minimized,
 			}))
@@ -24,7 +25,7 @@ const Footer: FC = () => {
 	return (
 		<StyledFooter>
 			{Object.keys(Modals).map(id => (
-				<FooterItem key={id} onClick={() => ToggleMinimized(id)}>
+				<FooterItem key={id} onClick={() => Toggle(id)}>
 					{Modals[id].name}
 				</FooterItem>
 			))}
