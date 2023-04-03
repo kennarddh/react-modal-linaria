@@ -64,6 +64,7 @@ export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 				prev[id].status !== IModalStatus.Open
 			) {
 				const Component = { ...prev[id], ...data }.component
+
 				data.componentState = <Component />
 			} else if (
 				data.status === IModalStatus.Minimized &&
