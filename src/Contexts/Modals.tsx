@@ -1,5 +1,7 @@
 import { FC, createContext, ReactNode, useCallback, useState } from 'react'
 
+import InputModal from 'Components/Modals/InputModal'
+
 import { IValueOrFactory } from 'Types'
 
 type IUpdateModal = (
@@ -37,13 +39,31 @@ const ModalsContext = createContext<IModalsContext>({
 export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [Modals, SetModals] = useState<Record<string, IModal>>({
 		'316ca831-aa32-441f-955e-263a19be6617': {
-			name: 'First',
+			name: 'Text',
 			height: 200,
 			width: 200,
 			status: IModalStatus.Closed,
 			x: 100,
 			y: 100,
-			component: () => <p>hello</p>,
+			component: () => <p>Hello World</p>,
+		},
+		'8965416f-72b8-4dbf-985a-4a5cfa32ee82': {
+			name: 'Input 1',
+			height: 200,
+			width: 200,
+			status: IModalStatus.Closed,
+			x: 100,
+			y: 100,
+			component: InputModal,
+		},
+		'd0231516-8519-44a6-a0dd-d542677711ed': {
+			name: 'Input 2',
+			height: 200,
+			width: 200,
+			status: IModalStatus.Closed,
+			x: 100,
+			y: 100,
+			component: InputModal,
 		},
 	})
 
