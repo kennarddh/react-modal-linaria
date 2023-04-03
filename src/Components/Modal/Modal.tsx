@@ -68,6 +68,8 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 		})
 	}, [UpdateModal, id])
 
+	const Component = Modals[id].component
+
 	return (
 		<StyledModal
 			ref={ModalRef}
@@ -89,7 +91,9 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 					<ModalHeaderButton onClick={Close}>X</ModalHeaderButton>
 				</ModalHeaderRight>
 			</ModalHeader>
-			<ModalBody>{Modals[id].componentState}</ModalBody>
+			<ModalBody>
+				<Component />
+			</ModalBody>
 		</StyledModal>
 	)
 }

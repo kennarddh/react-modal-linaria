@@ -28,7 +28,6 @@ export interface IModal {
 	height: number
 	status: IModalStatus
 	component: FC
-	componentState?: ReactNode
 }
 
 const ModalsContext = createContext<IModalsContext>({
@@ -77,16 +76,7 @@ export const ModalsProvider: FC<{ children: ReactNode }> = ({ children }) => {
 				data = modal
 			}
 
-			if (data.status === IModalStatus.Closed) {
-				data.componentState = undefined
-			} else if (
-				data.status === IModalStatus.Open &&
-				prev[id].status !== IModalStatus.Open
-			) {
-				const Component = { ...prev[id], ...data }.component
-
-				data.componentState = <Component />
-			} else if (
+			if (
 				data.status === IModalStatus.Minimized &&
 				prev[id].status === IModalStatus.Closed
 			) {
