@@ -76,6 +76,8 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 				height: Modals[id].height,
 				top: Modals[id].y,
 				left: Modals[id].x,
+				display:
+					Modals[id].status === IModalStatus.Open ? 'block' : 'none',
 			}}
 		>
 			<ModalHeader ref={drag}>
