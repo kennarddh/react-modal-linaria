@@ -1,4 +1,4 @@
-# React JS Boilerplate
+# React Modal
 
 ## Guide
 
