@@ -8,16 +8,17 @@
 
 ### Build Script
 
-| Name            | Styled Components | Linaria      | Better            |
-| --------------- | ----------------- | ------------ | ----------------- |
-| Index.html Size | 0.36 kB           | 0.42 kB      | Styled Components |
-| CSS Size        | 0                 | 2.21 kB      | Styled Components |
-| JS Size         | 232.48 kB         | 201.53 kB    | Linaria           |
-| Total Size      | 232.84 kB         | 204.16 kB    | Linaria           |
-| Gzip CSS Size   | 0                 | 0.58         | Styled Components |
-| Gzip JS Size    | 74.05 kB          | 63.07 kB     | Linaria           |
-| Gzip Total Size | 74.41 kB          | 64.07 kB     | Linaria           |
-| Build Time      | 14.95 Seconds     | 17.1 Seconds | Styled Components |
+| Name                | Styled Components | Linaria      | Better            |
+| ------------------- | ----------------- | ------------ | ----------------- |
+| Index.html Size     | 0.36 kB           | 0.42 kB      | Styled Components |
+| CSS Size            | 0                 | 2.21 kB      | Styled Components |
+| JS Size             | 232.48 kB         | 201.53 kB    | Linaria           |
+| Total Size          | 232.84 kB         | 204.16 kB    | Linaria           |
+| Gzip CSS Size       | 0                 | 0.58         | Styled Components |
+| Gzip JS Size        | 74.05 kB          | 63.07 kB     | Linaria           |
+| Gzip Total Size     | 74.41 kB          | 64.07 kB     | Linaria           |
+| Transformed Modules | 159               | 148          | Linaria           |
+| Build Time          | 14.95 Seconds     | 17.1 Seconds | Styled Components |
 
 #### Styled Components
 
