@@ -9,13 +9,12 @@ import { ModalsProvider } from 'Contexts/Modals'
 
 import App from './App'
 
-import GlobalStyle from './Styles'
+import './Styles.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<GlobalStyle />
 		<DndProvider backend={HTML5Backend}>
 			<ModalsProvider>
 				<App />

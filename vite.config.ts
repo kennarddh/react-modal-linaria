@@ -8,6 +8,8 @@ import linaria from '@linaria/vite'
 
 import { resolve } from 'path'
 
+import BabelConfig from './babel.config'
+
 export const relativeAlias: Record<string, string> = {
 	Components: './src/Components',
 	Contexts: './src/Contexts',
@@ -38,7 +40,12 @@ export default defineConfig(({ mode }) => {
 	const appEnv = loadEnv(mode, process.cwd(), envPrefix)
 
 	return {
-		plugins: [react(), eslintPlugin(), svgr(), linaria()],
+		plugins: [
+			react(),
+			eslintPlugin(),
+			svgr(),
+			linaria({ babelOptions: BabelConfig }),
+		],
 		resolve: {
 			alias: resolveAlias,
 		},
