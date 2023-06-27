@@ -3,7 +3,8 @@
 		"composite": true,
 		"module": "ESNext",
 		"moduleResolution": "Node",
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"allowJs": true,
 	},
 	"include": [
 		"vite.config.ts",
@@ -11,5 +12,7 @@
 		".eslintrc.js",
 		"jest.config.ts",
 		"jest.setup.ts"
-	]
+	],
+	"exclude": ["src/**/*.ts"],
+	"extends": "./tsconfig.json"
 }
