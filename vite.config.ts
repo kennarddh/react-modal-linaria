@@ -8,7 +8,7 @@ import linaria from '@linaria/vite'
 
 import { resolve } from 'path'
 
-import BabelConfig from './babel.config'
+import BabelConfig from './babel.config.js'
 
 export const relativeAlias: Record<string, string> = {
 	Components: './src/Components',
