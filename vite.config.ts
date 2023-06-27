@@ -60,5 +60,8 @@ export default defineConfig(({ mode }) => {
 		define: {
 			env: { ...appEnv },
 		},
+		preview: {
+			port: 3002,
+		},
 	}
 })
