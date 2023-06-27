@@ -1,6 +1,12 @@
 import { styled } from '@linaria/react'
 
-export const StyledModal = styled.div`
+export const StyledModal = styled.div<{
+	width: number
+	height: number
+	top: number
+	left: number
+	display: 'block' | 'none'
+}>`
 	overflow: auto;
 	resize: both;
 
@@ -13,6 +19,12 @@ export const StyledModal = styled.div`
 		border-right: 2px solid #000;
 		border-bottom: 2px solid #000;
 	}
+
+	width: ${({ width }) => width}px;
+	height: ${({ height }) => height}px;
+	top: ${({ top }) => top}px;
+	left: ${({ left }) => left}px;
+	display: ${({ display }) => display};
 `
 
 export const ModalHeader = styled.div`

@@ -73,14 +73,11 @@ const Modal: FC<{ id: string }> = ({ id }) => {
 	return (
 		<StyledModal
 			ref={ModalRef}
-			style={{
-				width: Modals[id].width,
-				height: Modals[id].height,
-				top: Modals[id].y,
-				left: Modals[id].x,
-				display:
-					Modals[id].status === IModalStatus.Open ? 'block' : 'none',
-			}}
+			width={Modals[id].width}
+			height={Modals[id].height}
+			top={Modals[id].y}
+			left={Modals[id].x}
+			display={Modals[id].status === IModalStatus.Open ? 'block' : 'none'}
 		>
 			<ModalHeader ref={drag}>
 				<ModalHeaderLeft>{Modals[id].name}</ModalHeaderLeft>
